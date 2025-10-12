@@ -1,0 +1,12 @@
+# pvdaq requirements 
+pvdaq_access
+boto3
+botocore
+jmespath
+numpy
+pandas
+python-dateutil
+pytz
+s3transfer==0.6.0
+six
+urllib3
