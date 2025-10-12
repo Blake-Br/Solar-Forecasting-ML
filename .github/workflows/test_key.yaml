@@ -1,0 +1,18 @@
+name: test-api-key
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      NREL_API_KEY: ${{ secrets.NREL_API_KEY}}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show API Key Status
+        run: |
+          if [ -z "$NREL_API_KEY" ]; then
+            echo "API KEY MISSING"
+            exit 1
+          else
+            echo "API DETECTED"
+            echo "Prefix: ${NREL_API_KEY:0:5}*******"
