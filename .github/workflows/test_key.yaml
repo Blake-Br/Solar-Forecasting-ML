@@ -14,6 +14,6 @@ jobs:
           if [ -z "$NREL_API_KEY" ]; then
             echo "API KEY MISSING"
             exit 1
-          else
+          fi
             echo "API DETECTED"
             echo "Prefix: $(printf "%s" "$NREL_API_KEY" | head -c 5)*******"
