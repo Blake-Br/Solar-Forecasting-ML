@@ -9,10 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Show API Key Status
+        shell: bash
         run: |
           if [ -z "$NREL_API_KEY" ]; then
             echo "API KEY MISSING"
             exit 1
           else
             echo "API DETECTED"
-            echo "Prefix: ${NREL_API_KEY:0:5}*******"
+            echo "Prefix: $(printf "%s" "$NREL_API_KEY" | head -c 5)*******"
