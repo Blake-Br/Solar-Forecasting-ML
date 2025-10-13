@@ -18,3 +18,7 @@ build/
 #IDE configs
 .vscode/
 .idea/
+
+# data
+data/
+*.csv
