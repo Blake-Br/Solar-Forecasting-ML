@@ -20,5 +20,7 @@ build/
 .idea/
 
 # data
-data/
-*.csv
+data/**/*.csv
+!data/systemdata/system_data.csv
+!data/.gitkeep
+!data/**/.gitkeep
