@@ -21,6 +21,7 @@ build/
 
 # data
 data/**/*.csv
+!data/processed/**/*.csv
 !data/systemdata/system_data.csv
 !data/.gitkeep
 !data/**/.gitkeep
