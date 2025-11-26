@@ -1,10 +1,12 @@
 import csv
+import os
 from pathlib import Path
 from data_processing import process_system as process_system
 from data_processing import open_data as open_data
+from data_processing import get_chars as get_chars
 
 def load_valid_system_ids():
-    system_file = Path("data/systemdata/system3_data.csv")
+    system_file = Path("data/systemdata/system_data.csv")
     ids = set()
 
     with system_file.open("r", newline="", encoding="utf-8") as f:
@@ -26,7 +28,7 @@ def get_system_id() -> str:
             continue
         if system_id not in VALID_SYSTEM_IDS:
             print("Error: System ID {system_id} not found in system_data.csv")
-            continue
+            return 0
         return system_id
 
 def main():
@@ -35,6 +37,7 @@ def main():
         print("1 -- Get system data")
         print("2 -- Remove system data")
         print("3 -- Open data")
+        print("4 -- Data characteristics")
         print("q -- Quit")
 
         choice = input("Select an option: ").strip().lower()
@@ -43,7 +46,7 @@ def main():
             case "1":
                 system_id = get_system_id()
                 if system_id == -1: continue
-                target = Path(f"data/processed/system_{system}_data.csv")
+                target = Path(f"data/processed/system_{system_id}_data.csv")
                 if target.exists():
                     print("Error: system data already exists")
                 else: process_system(system_id)
@@ -51,7 +54,7 @@ def main():
             case "2":
                 system_id = get_system_id()
                 if system_id == -1: continue
-                target = Path(f"data/processed/system_{system}_data.csv")
+                target = Path(f"data/processed/system_{system_id}_data.csv")
                 if not target.exists():
                     print("Error: system data does not exist exists")
                 else: os.remove(target)
@@ -59,6 +62,10 @@ def main():
                 system_id = get_system_id()
                 if system_id == -1: continue
                 open_data(system_id)
+            case "4":
+                system_id = get_system_id()
+                if system_id == -1: continue
+                get_chars(system_id)
             case "q":
                 break
 
