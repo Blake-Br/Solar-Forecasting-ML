@@ -14,12 +14,12 @@ def process_system(system: str):
 
     
     base_dir = Path("data")  # main data folder
-    raw_dir = base_dir / "raw" / f"system_{system}"
-    proc_dir = base_dir / "processed"
+    raw_dir = base_dir / "raw/temp" / f"system_{system}"
+    concat_dir = base_dir / "raw/concatenated"
 
     # Create system-specific subfolder
     raw_dir.mkdir(parents=True, exist_ok=True)
-    proc_dir.mkdir(parents=True, exist_ok=True)
+    concat_dir.mkdir(parents=True, exist_ok=True)
 
     final_name = f"system_{system}_data.csv"
     final_file = raw_dir / final_name
@@ -31,7 +31,7 @@ def process_system(system: str):
     pvdaq_access.concatenateData(system, str(raw_dir))
 
     # move concatenated data, remove individual csv files
-    shutil.move(str(final_file), str(proc_dir / final_name))
+    shutil.move(str(final_file), str(concat_dir / final_name))
 
     for f in raw_dir.iterdir():
         if f.is_file():
@@ -39,7 +39,7 @@ def process_system(system: str):
     raw_dir.rmdir()
 
 def open_data(system: str):
-    target = Path(f"data/processed/system_{system}_data.csv")
+    target = Path(f"data/raw/concatenated/system_{system}_data.csv")
     if not target.exists():
         print("Error: system data has not been downloaded. Go download it.")
         return
@@ -47,17 +47,17 @@ def open_data(system: str):
     print(f"Opening {target}")
 
 def get_chars(system: str):
-    target = Path(f"data/processed/system_{system}_data.csv")
+    target = Path(f"data/raw/concatenated/system_{system}_data.csv")
     if not target.exists():    
         print("Error: system data has not been downloaded. Go download it.")
         return
     df = pd.read_csv(target)
-    print("Attributes: ")
+    print("\nAttributes: \n")
     for c in df.columns:
         print(c)
 
 def change_col(system: str, attr_old: str, attr_new: str):
-    target = Path(f"data/processed/system_{system}_data.csv")
+    target = Path(f"data/raw/concatenated/system_{system}_data.csv")
     if not target.exists():    
         print("Error: system data has not been downloaded. Go download it.")
         return
@@ -69,7 +69,7 @@ def change_col(system: str, attr_old: str, attr_new: str):
         print("Attribute not found in csv file.")
 
 def remove_col(system: str, attr_to_rem: str):
-    target = Path(f"data/processed/system_{system}_data.csv")
+    target = Path(f"data/raw/concatenated/system_{system}_data.csv")
     if not target.exists():    
         print("Error: system data has not been downloaded. Go download it.")
         return
@@ -81,7 +81,7 @@ def remove_col(system: str, attr_to_rem: str):
         print("Attribute not found in csv file.")
 
 def add_col(system: str, attr_to_add: str, vals=None):
-    target = Path(f"data/processed/system_{system}_data.csv")
+    target = Path(f"data/raw/concatenated/system_{system}_data.csv")
     if not target.exists():    
         print("Error: system data has not been downloaded. Go download it.")
         return
