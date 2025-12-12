@@ -28,7 +28,7 @@ def process_system(system: str):
 
     # Download into that subfolder
     pvdaq_access.downloadData(system, str(raw_dir), file_type=file_type)
-    pvdaq_access.concatenateData(system, str(raw_dir))
+    pvdaq_access.concatenateData(system, str(concat_dir))
 
     # move concatenated data, remove individual csv files
     shutil.move(str(final_file), str(concat_dir / final_name))

@@ -38,6 +38,7 @@ def main():
         print("2 -- Remove system data")
         print("3 -- Open data")
         print("4 -- Data characteristics")
+        
         print("q -- Quit")
 
         choice = input("Select an option: ").strip().lower()
@@ -66,6 +67,7 @@ def main():
                 system_id = get_system_id()
                 if system_id == -1: continue
                 get_chars(system_id)
+            
             case "q":
                 break
 

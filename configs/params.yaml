@@ -1,6 +1,0 @@
-timezone: "UTC"
-power_unit: "kW"
-irradiance_unit: "W/m^2"
-missing_value: null
-resample: "15min"
-site_metadata_required: ""

@@ -21,7 +21,9 @@ build/
 
 # data
 data/**/*.csv
-!data/processed/**/*.csv
+
+!data/model_ready/all_sites.csv
+!data/model_ready/site_normalization_stats.csv
 !data/systemdata/system_data.csv
 !data/.gitkeep
 !data/**/.gitkeep
